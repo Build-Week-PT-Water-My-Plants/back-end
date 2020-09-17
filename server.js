@@ -16,7 +16,7 @@ server.use(express.json())
 server.use(session({
     resave: false,
     saveUninitialized: false,
-    secret: "Keep it Blobs"
+    secret: process.env.JWT_SECRET,
 }))
 
 
