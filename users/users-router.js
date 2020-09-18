@@ -2,6 +2,7 @@ const express = require("express")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const Users = require("./users-model")
+const restrict = require("../plants/plants-middleware")
 
 const router = express.Router()
 
@@ -57,7 +58,7 @@ router.post("/login", async(req, res, next) => {
     }
 });
 
-router.get("/logout", async(req, res, next) => {
+router.get("/logout", restrict(), (req, res, next) => {
     try {
         req.session.destroy((err) => {
             if (err) {
@@ -71,11 +72,23 @@ router.get("/logout", async(req, res, next) => {
     }
 })
 
-router.put("/:id", async(req, res, next) => {
+router.put("/updateuser/:id", restrict(), async(req, res, next) => {
     try {
         const {id} = req.params;
-        const changes = req.body;
+        const {phoneNumber, password} = req.body
+        const user = await Users.findBy({id}).first()
 
+        if(!user) {
+            return res.status(404).json({
+                message: "User not found"
+            })
+        }
+        const userUpdate = await Users.updateUser({
+            phoneNumber,
+            password,
+        })
+
+        res.status(204).json(userUpdate)
     } catch(err) {
         next(err)
     }
