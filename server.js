@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express")
 const cors = require("cors")
 const helmet = require("helmet")
@@ -16,11 +18,11 @@ server.use(express.json())
 server.use(session({
     resave: false,
     saveUninitialized: false,
-    secret: process.env.JWT_SECRET,
+    secret: "process.env.JWT_SECRET",
 }))
 
 
-server.use("/api/users", usersRouter)
-server.use("/api/plants", authenticate, plantsRouter)
+// server.use("/api/users", usersRouter)
+// server.use("/api/plants", authenticate, plantsRouter)
 
-module.exports = router
+module.exports = server
