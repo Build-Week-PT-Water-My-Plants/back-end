@@ -23,6 +23,14 @@ server.use(session({
 
 
 // server.use("/api/users", usersRouter)
-// server.use("/api/plants", authenticate, plantsRouter)
+server.use("/plants", plantsRouter) //need  to put back in authentication once users router done to test once logged in
+
+server.use((err, req, res, next) => {
+	console.log(err)
+	
+	res.status(500).json({
+		message: "Something went wrong",
+	})
+})
 
 module.exports = server
