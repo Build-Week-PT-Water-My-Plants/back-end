@@ -22,7 +22,7 @@ server.use(session({
 }))
 
 
-// server.use("/api/users", usersRouter)
+server.use("/api/users", usersRouter)
 // server.use("/api/plants", authenticate, plantsRouter)
 
 module.exports = server
