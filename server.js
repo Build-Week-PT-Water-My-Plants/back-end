@@ -17,19 +17,11 @@ server.use(express.json())
 server.use(session({
     resave: false,
     saveUninitialized: false,
-    secret: "process.env.JWT_SECRET",
+    secret: process.env.JWT_SECRET,
 }))
 
 
 server.use("/users", usersRouter)
-server.use("/plants", plantsRouter) 
-
-server.use((err, req, res, next) => {
-	console.log(err)
-	
-	res.status(500).json({
-		message: "Something went wrong",
-	})
-})
+// server.use("/plants",plantsRouter)
 
 module.exports = server
