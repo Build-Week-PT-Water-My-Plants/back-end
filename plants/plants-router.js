@@ -1,11 +1,12 @@
 const express = require("express")
 const Plants = require("./plants-model")
+const restrict = require("../plants/plants-middleware")
 
 const router = express.Router()
 
 
 // get list of plants (this works)
-router.get("/", async (req, res, next) => {
+router.get("/",restrict(), async (req, res, next) => {
     try {
         res.json(await Plants.find())
     } catch(err) {
@@ -14,7 +15,7 @@ router.get("/", async (req, res, next) => {
 })
 
 // get plants by ID (this works)
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", restrict(), async (req, res, next) => {
     try {
         const plant = await Plants.findById(req.params.id)
         if (!plant) {
@@ -30,7 +31,7 @@ router.get("/:id", async (req, res, next) => {
 
 
 // get list of plants by user id (this should work)
-router.get("/:id/plantsList", async (req, res, next) => {
+router.get("/:id/plantsList", restrict(), async (req, res, next) => {
     const { id } = req.params
     Plants.getPlantsList(id)
         .then(list => {
