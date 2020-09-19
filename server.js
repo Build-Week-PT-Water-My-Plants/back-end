@@ -7,7 +7,7 @@ const session = require("express-session")
 
 const usersRouter = require("./users/users-router")
 const plantsRouter = require("./plants/plants-router")
-const authenticate = require("./plants/plants-middleware")
+
 
 
 const server = express()
@@ -18,11 +18,11 @@ server.use(express.json())
 server.use(session({
     resave: false,
     saveUninitialized: false,
-    secret: "process.env.JWT_SECRET",
+    secret: process.env.JWT_SECRET,
 }))
 
 
-// server.use("/api/users", usersRouter)
-// server.use("/api/plants", authenticate, plantsRouter)
+server.use("/users", usersRouter)
+// server.use("/plants",plantsRouter)
 
 module.exports = server
