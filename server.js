@@ -7,7 +7,6 @@ const session = require("express-session")
 
 const usersRouter = require("./users/users-router")
 const plantsRouter = require("./plants/plants-router")
-// const authenticate = require("./plants/plants-middleware")
 
 
 const server = express()
