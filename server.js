@@ -22,6 +22,6 @@ server.use(session({
 
 
 server.use("/users", usersRouter)
-// server.use("/plants",plantsRouter)
+server.use("/plants",plantsRouter)
 
 module.exports = server
