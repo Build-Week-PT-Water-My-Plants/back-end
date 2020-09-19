@@ -7,7 +7,7 @@ const session = require("express-session")
 
 const usersRouter = require("./users/users-router")
 const plantsRouter = require("./plants/plants-router")
-const authenticate = require("./plants/plants-middleware")
+// const authenticate = require("./plants/plants-middleware")
 
 
 const server = express()
@@ -22,8 +22,8 @@ server.use(session({
 }))
 
 
-// server.use("/api/users", usersRouter)
-server.use("/plants", authenticate, plantsRouter) 
+server.use("/users", usersRouter)
+server.use("/plants", plantsRouter) 
 
 server.use((err, req, res, next) => {
 	console.log(err)
