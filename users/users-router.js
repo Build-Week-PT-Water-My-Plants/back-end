@@ -6,6 +6,14 @@ const restrict = require("../plants/plants-middleware")
 
 const router = express.Router()
 
+router.get("/", restrict(), async (req,res,next) => {
+    try {
+        res.json(await Users.find())
+    } catch(err) {
+        next(err)
+    }
+})
+
 router.post("/register", async (req, res, next) => {
     try {
         const {username, password, phoneNumber} = req.body
@@ -72,23 +80,12 @@ router.get("/logout", restrict(), (req, res, next) => {
     }
 })
 
-router.put("/updateuser/:id", restrict(), async(req, res, next) => {
+router.put("/:id/updateaccount", restrict(), async(req, res, next) => {
     try {
-        const {id} = req.params;
         const {phoneNumber, password} = req.body
-        const user = await Users.findBy({id}).first()
-
-        if(!user) {
-            return res.status(404).json({
-                message: "User not found"
-            })
-        }
-        const userUpdate = await Users.updateUser({
-            phoneNumber,
-            password,
-        })
-
-        res.status(204).json(userUpdate)
+        const userUpdate = await Users.updateUser({phoneNumber, password: await bcrypt.hash(password, 14)}, req.params.id)
+        
+        res.status(200).json({userUpdate:userUpdate, message: "You have successfully updated your information"})
     } catch(err) {
         next(err)
     }
