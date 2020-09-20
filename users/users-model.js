@@ -8,7 +8,7 @@ async function create(user) {
 
 function find() {
     return db("users")
-    .select("id", "username")
+    .select("id", "username", "phoneNumber", "password")
 }
 
 function findBy(filter) {
