@@ -7,7 +7,7 @@ const session = require("express-session")
 
 const usersRouter = require("./users/users-router")
 const plantsRouter = require("./plants/plants-router")
-const welcome = require("./welcome")
+const welcomeRouter = require("./welcome-router")
 
 
 const server = express()
@@ -22,7 +22,7 @@ server.use(session({
 }))
 
 
-server.use("/", welcome)
+server.use("/", welcomeRouter)
 server.use("/users", usersRouter)
 server.use("/plants",plantsRouter)
 
