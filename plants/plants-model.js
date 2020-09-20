@@ -11,7 +11,7 @@ function find() {
 
 function findBy(filter) {
 	return db("plants")
-		.select("id", "nickname")
+		.select("id", "nickname", "species", "h2oFrequency")
 		.where(filter)
 }
 
@@ -30,10 +30,27 @@ function getPlantsList(userID) {
         .orderBy('plants.id')
 }
 
+// update plant
+function update(id, changes) {
+	return db("plants")
+		.where({id})
+		.update(changes)
+		.then(() => findBy({id}))
+}
+
+// delete plant
+function remove(id) {
+	return db("plants")
+		.where({id})
+		.del()
+}
+
 module.exports = {
 	add,
 	find,
 	findBy,
     findById,
-    getPlantsList
+	getPlantsList,
+	remove,
+	update
 }
