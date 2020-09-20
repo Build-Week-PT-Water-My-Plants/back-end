@@ -80,11 +80,11 @@ router.get("/logout", restrict(), (req, res, next) => {
     }
 })
 
-router.put("/:id/updateaccount", restrict(), async(req, res, next) => {
+router.put("/:id", restrict(), async(req, res, next) => {
     try {
         const {phoneNumber, password} = req.body
         const userUpdate = await Users.updateUser({phoneNumber, password: await bcrypt.hash(password, 14)}, req.params.id)
-        
+
         res.status(200).json({userUpdate:userUpdate, message: "You have successfully updated your information"})
     } catch(err) {
         next(err)
