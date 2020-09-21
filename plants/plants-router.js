@@ -68,7 +68,7 @@ router.put("/:id", restrict(), async (req, res, next) => {
         Plants.update(req.params.id, req.body)
             .then(updatedPlant => {
                 if(updatedPlant) {
-                    res.json(updatedPlant)
+                    res.status(200).json({updatedPlant, message: "You have successfully updated your plant information"})
                 } else {
                     res.status(404).json({
                         message: "Could not find plant with given ID"
