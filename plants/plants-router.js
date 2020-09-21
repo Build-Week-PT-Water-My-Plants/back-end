@@ -5,7 +5,7 @@ const restrict = require("../plants/plants-middleware")
 const router = express.Router()
 
 
-// get list of plants (this works)
+// get list of plants
 router.get("/",restrict(), async (req, res, next) => {
     try {
         res.json(await Plants.find())
@@ -14,7 +14,7 @@ router.get("/",restrict(), async (req, res, next) => {
     }
 })
 
-// get plants by ID (this works)
+// get plants by ID
 router.get("/:id", restrict(), async (req, res, next) => {
     try {
         const plant = await Plants.findById(req.params.id)
@@ -30,7 +30,7 @@ router.get("/:id", restrict(), async (req, res, next) => {
 })
 
 
-// get list of plants by user id (this should work)
+// get list of plants by user id
 router.get("/:id/plantsList", restrict(), async (req, res, next) => {
     const { id } = req.params
     Plants.getPlantsList(id)
@@ -44,7 +44,7 @@ router.get("/:id/plantsList", restrict(), async (req, res, next) => {
 
 
 // add plant to user - needs user_id in req to post
-router.post("/", async (req, res, next) => {
+router.post("/", restrict(), async (req, res, next) => {
     try {
         Plants.add(req.body)
             .then(newPlant => {

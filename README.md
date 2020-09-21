@@ -30,3 +30,30 @@ https://water-my-plants-back-end1.herokuapp.com/users/:id
 GET request to:
 
 https://water-my-plants-back-end1.herokuapp.com/plants/
+
+
+### Get List Of plants by user ID:
+
+GET request to:
+
+https://water-my-plants-back-end1.herokuapp.com/plants/:id/plantsList
+
+
+### Add Plant to user (requires userID in request)
+
+POST request to:
+
+https://water-my-plants-back-end1.herokuapp.com/plants/
+
+
+### Edit Plant
+
+PUT request to:
+
+https://water-my-plants-back-end1.herokuapp.com/plants/:id
+
+### Delete Plant
+
+DELETE request to:
+
+https://water-my-plants-back-end1.herokuapp.com/plants/:id
