@@ -32,7 +32,7 @@ router.get("/:id", restrict(), async (req, res, next) => {
 
 // get list of plants by user id
 router.get("/:id/plantsList", restrict(), async (req, res, next) => {
-    const { id } = req.params
+    const { id } = req.params.id
     Plants.getPlantsList(id)
         .then(list => {
             res.json(list)
@@ -43,12 +43,15 @@ router.get("/:id/plantsList", restrict(), async (req, res, next) => {
 })
 
 
-// add plant to user - needs user_id in req to post
-router.post("/", restrict(), async (req, res, next) => {
+// add plant to user
+router.post("/:id", restrict(), (req, res, next) => {
+    const plantData = req.body
+    const id = req.params.id
+    req.body.user_id = id
     try {
-        Plants.add(req.body)
-            .then(newPlant => {
-                res.status(200).json(newPlant)
+        Plants.add(plantData)
+            .then(plant => {
+                res.status(201).json(plant)
             })
             .catch(err => {
                 res.status(500).json({
@@ -62,7 +65,7 @@ router.post("/", restrict(), async (req, res, next) => {
 
 
 
-// edit plant (working but not returning error message)
+// edit plant
 router.put("/:id", restrict(), async (req, res, next) => {
     try {
         Plants.update(req.params.id, req.body)

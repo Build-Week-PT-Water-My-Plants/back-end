@@ -1,8 +1,13 @@
 const db = require("../database/config")
 
-async function add(plant) {
-	const [id] = await db("plants").insert(plant, "id")
-	return findById(id)
+
+function add(plant) {
+	return db("plants")
+		.insert(plant, "id").then(ids => {
+			const [id] = ids
+			return db("plants")
+				.where({ id }).first()
+		})
 }
 
 function find() {
