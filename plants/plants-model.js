@@ -1,20 +1,28 @@
 const db = require("../database/config")
 
-async function add(plant) {
-	const [id] = await db("plants").insert(plant, "id")
-	return findById(id)
+// add plant
+function add(plant) {
+	return db("plants")
+		.insert(plant, "id").then(ids => {
+			const [id] = ids
+			return db("plants")
+				.where({ id }).first()
+		})
 }
 
+// find plant
 function find() {
 	return db("plants").select("id", "nickname", "species", "h2oFrequency")
 }
 
+// find By
 function findBy(filter) {
 	return db("plants")
 		.select("id", "nickname", "species", "h2oFrequency")
 		.where(filter)
 }
 
+// find plant by id
 function findById(id) {
 	return db("plants")
 		.select("id", "nickname")
