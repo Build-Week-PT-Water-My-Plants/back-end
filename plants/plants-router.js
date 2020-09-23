@@ -44,7 +44,7 @@ router.get("/:id/plantsList", restrict(), async (req, res, next) => {
 
 
 // add plant to user
-router.post("/:id", restrict(), (req, res, next) => {
+router.post("/addPlant/:id", restrict(), (req, res, next) => {
     const plantData = req.body
     const id = req.params.id
     req.body.user_id = id

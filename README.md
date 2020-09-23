@@ -19,6 +19,8 @@ POST request to:
 
 https://water-my-plants-back-end1.herokuapp.com/users/login
 
+*Dummy Login: username: plantuser123, password: 123456
+
 ### Edit phone number and password:
 
 PUT request to:
@@ -39,11 +41,11 @@ GET request to:
 https://water-my-plants-back-end1.herokuapp.com/plants/:id/plantsList
 
 
-### Add Plant to user (requires userID in request)
+### Add Plant to user
 
 POST request to:
 
-https://water-my-plants-back-end1.herokuapp.com/plants/
+https://water-my-plants-back-end1.herokuapp.com/plants/addPlant/:id
 
 
 ### Edit Plant
