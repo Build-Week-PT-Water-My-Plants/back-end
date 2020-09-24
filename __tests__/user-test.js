@@ -55,10 +55,9 @@ describe("User authentication testing", () => {
         const res = await supertest(server)
         .post("/users/login")
         .send({username:"plantuser123", password:"123456"})
-        const [cookie] = res.headers["set-cookie"]
+        expect(res.body.message).toBe("Welcome to your plant page plantuser123!")
         const res2 = await supertest(server)
         .put("/users/1")
-        .set("Cookie", cookie)
         .send({phoneNumber: 1234567891, password:"123456"})
         expect(res2.statusCode).toBe(200)
     })
