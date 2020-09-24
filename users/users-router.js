@@ -55,10 +55,6 @@ router.post("/login", async(req, res, next) => {
             userId: user.id,
         }, process.env.JWT_SECRET)
         
-        
-
-      
-
         res.json({
             message: `Welcome to your plant page ${user.username}!`, token
         })
