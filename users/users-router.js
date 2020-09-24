@@ -55,11 +55,12 @@ router.post("/login", async(req, res, next) => {
             userId: user.id,
         }, process.env.JWT_SECRET)
         
+        
 
-        res.cookie("token", token)
+      
 
         res.json({
-            message: `Welcome to your plant page ${user.username}!`
+            message: `Welcome to your plant page ${user.username}!`, token
         })
     } catch (err) {
         next(err)
