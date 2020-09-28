@@ -14,21 +14,6 @@ router.get("/",restrict(), async (req, res, next) => {
     }
 })
 
-// get plants by ID
-router.get("/:id", restrict(), async (req, res, next) => {
-    try {
-        const plant = await Plants.findById(req.params.id)
-        if (!plant) {
-            return res.status(404).json({
-                message: "This plant doesn't exist"
-            })
-        }
-        res.json(plant)
-    } catch(err) {
-        next(err)
-    }
-})
-
 
 // get list of plants by user id
 router.get("/:id/plantsList", restrict(), async (req, res, next) => {
@@ -65,7 +50,7 @@ router.post("/addPlant/:id", restrict(), (req, res, next) => {
 
 
 
-// edit plant
+// // edit plant
 router.put("/:id", restrict(), async (req, res, next) => {
     try {
         Plants.update(req.params.id, req.body)
